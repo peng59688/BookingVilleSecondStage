@@ -1,5 +1,5 @@
 import React from 'react';
-import {SearchIcon} from '@primer/octicons-react'
+
 
 export default class AutoCompelteText extends React.Component{
     constructor(props){
