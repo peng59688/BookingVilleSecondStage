@@ -17,10 +17,10 @@ text:'',
             }
             
 onTextChanged=(e)=>{
-    console.log('e before is',e.target.value)
+    
     const {items}=this.props
     const value=e.target.value;
-    console.log('e after is',e.target.value)
+   
     let suggestions=[];
     if(value.length>0){
         const regex=new RegExp(`^${value}`,'i');

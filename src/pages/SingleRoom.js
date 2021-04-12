@@ -34,7 +34,7 @@ componentDidMount(){}
         return (
             <>
              <StyledHero img={images[0]}>
-                 <Banner title={`${name} room`}>
+                 <Banner title={`${name}`}>
                  <Link to='/rooms' className='btn-primary'>
                  back to room
                  </Link>
@@ -75,7 +75,11 @@ componentDidMount(){}
             })}
             </ul>
             </section>
-
+<div className='reserve'>
+<Link to='/rooms' className='btn-primary reserve'>
+                 I'll reserve
+                 </Link>
+</div >
             </>
         )
     }

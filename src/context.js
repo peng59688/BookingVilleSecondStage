@@ -25,12 +25,13 @@ const RoomContext=React.createContext();
 //getData
 getData=async()=>{
     try {
-        let response=await Client.getEntries({content_type:"bookingVille",
-    order:"fields.price"});
+        let response=await Client.getEntries({skip:0, limit: 300, content_type:"bookingVille"
+    });
+    //order:"fields.price"
         // console.log("response.items are", response.items)// convert response from an object to
         //an array
         let rooms=this.formatData(response.items)
-       
+       console.log("rooms are", rooms)
         let featuredRooms=rooms.filter(room=>room.featured===true)
         let maxPrice=Math.max(...rooms.map(item=>item.price))
         let maxSize=Math.max(...rooms.map(item=>item.size))

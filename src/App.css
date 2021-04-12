@@ -62,7 +62,7 @@ li {
   display: inline-block;
   text-decoration: none;
   letter-spacing: var(--mainSpacing);
-  color: var(--mainBlack);
+  color: var(blue);
   background: var(--primaryColor);
   padding: 0.4rem 0.9rem;
   border: 3px solid var(--primaryColor);
@@ -594,4 +594,8 @@ li {
 .flex {
   display: flex;
   flex-direction: row;
+}
+.reserve{
+  display:flex;
+  margin: 50px auto 50px auto;
 }
