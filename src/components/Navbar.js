@@ -34,8 +34,8 @@ import {RoomContext} from '../context'
                 </li>
                 
                 {currentUser ? (
-          <li className="hovereffect" onClick={()=>signOut()} >
-            Sign Out
+          <li onClick={()=>signOut()} >
+          <Link to="/">Sign Out</Link>
           </li>
         ) : (
           <li>
