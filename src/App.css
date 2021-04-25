@@ -164,6 +164,21 @@ li {
     padding: 0.5rem 0;
   }
 }
+
+.hovereffect {display: block;
+  text-decoration: none;
+  padding: 1rem 0;
+  color: var(--mainBlack);
+  transition: var(--mainTransition);
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: var(--mainSpacing);}
+
+.hovereffect{
+    margin: 0.5rem;
+    padding: 0.5rem 0;
+  }
 /* end of navbar */
 /* Hero */
 .defaultHero,

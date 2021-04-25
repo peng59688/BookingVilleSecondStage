@@ -2,43 +2,55 @@ import React, { Component } from 'react'
 import logo from '../images/logo.svg'
 import {FaAlignRight} from 'react-icons/fa'
 import {Link} from 'react-router-dom'
+import {useContext} from 'react'
+import {RoomContext} from '../context'
 
 
-
-export default class Navbar extends Component {
-    state={
-        isOpen:false
-    }
-    handleToggle=()=>{
-        this.setState({isOpen:!this.state.isOpen})
-    }
-    render() {
+ const Navbar= ()=> {
+    
+  const context=useContext(RoomContext)
+  const {
+     currentUser,signOut
+  }=context;
         return (
             <nav className="navbar">
               <div className="nav-center">
               <div className="nav-header">
+              {console.log("currentUser is",currentUser)}
         <Link to='/'>
         <img src={logo} alt="beach resort"/>
         </Link>
 
-           <button type="button" className="nav-btn" onClick={this.handleToggle}>
+           {/* <button type="button" className="nav-btn" onClick={this.handleToggle}>
            <FaAlignRight className="nav-icon"/>    
-           </button> 
+           </button>  */}
             </div> 
             
-            <ul className={this.state.isOpen?"nav-links show-nav ":"nav-links"}>
+            <ul className={"nav-links"}>
                 <li>
                     <Link to="/">Home</Link>
                     </li>
                     <li>
                     <Link to="/rooms">Rooms</Link>
                 </li>
-                <li>
-                <Link to='/'>Sign Up</Link>
+                
+                {currentUser ? (
+          <li className="hovereffect" onClick={()=>signOut()} >
+            Sign Out
+          </li>
+        ) : (
+          <li>
+                <a href="https://bookingvalley.auth.us-west-2.amazoncognito.com/login?response_type=token&client_id=1fqqbh0i7fof8b8l37l3r3ihc9&redirect_uri=https%3A%2F%2Fbookingvalley.netlify.app">
+             Sign In
+              </a>
                 </li>
-                <li>
-                <Link to='/'>Sign In</Link>
-                </li>
+        )}
+                
+        {/* <li>
+                <a href="https://bookingvalley.auth.us-west-2.amazoncognito.com/login?response_type=token&client_id=1fqqbh0i7fof8b8l37l3r3ihc9&redirect_uri=https%3A%2F%2Fbookingvalley.netlify.app">
+             Sign In
+              </a>
+                </li> */}
                 <li>
               <a href="https://facebook.com">
                 <i class="fab fa-facebook"></i>
@@ -51,7 +63,7 @@ export default class Navbar extends Component {
             </li>
             <li>
               <a href="https://instagram.com">
-                <i class="fab fa-instagram"></i>
+              <i class="fab fa-instagram"></i>
               </a>
             </li>
             </ul> 
@@ -59,4 +71,7 @@ export default class Navbar extends Component {
             </nav>
         )
     }
-}
+
+
+
+export default Navbar;

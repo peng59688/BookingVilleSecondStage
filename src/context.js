@@ -20,7 +20,10 @@ const RoomContext=React.createContext();
         maxSize:0,
         breakfast:false,
         pets:false,
-        hotel:"all"
+        hotel:"all",
+        postId:[],
+        currentUser:null
+
     }
 //getData
 getData=async()=>{
@@ -31,7 +34,7 @@ getData=async()=>{
         // console.log("response.items are", response.items)// convert response from an object to
         //an array
         let rooms=this.formatData(response.items)
-       console.log("rooms are", rooms)
+       
         let featuredRooms=rooms.filter(room=>room.featured===true)
         let maxPrice=Math.max(...rooms.map(item=>item.price))
         let maxSize=Math.max(...rooms.map(item=>item.size))
@@ -42,12 +45,112 @@ getData=async()=>{
         console.log(error)
     }
 }
+//get Currentuser
+getCurrentUser=()=>{
+    const url=window.location.href;
+     var index=url.indexOf("#id_token=");
+    // var index=url.indexOf("lo")
+   
+   if(index!==-1){
+ const currentToken=url.substring(index+10,url.length)
+ this.setState({currentUser:currentToken})
+ ;}
+ 
+}
 
 
 componentDidMount(){
-   this.getData()
+   this.getData();
+   this.getCurrentUser();
+   const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ roomType: "Mountain View Suite",
+    hotelName: "Hilton Waikiki Beach", })
+};
+fetch('https://zmtiry43m6.execute-api.us-west-2.amazonaws.com/v1/query-reservation', requestOptions)
+    .then(async response => {
+        const data = await response.json();
+       
+        // display data in UI.
+        this.setState({ postId: data })
+
+    })
+    .catch(error => {
+                         this.setState({ errorMessage: error.toString() });
+                        console.error('There was an error!', error);
+                 });    
+ 
+// 1.
+// const requestOptions = {
+//     method: 'POST',
+//     headers: { 'Content-Type': 'application/json' },
+//     body: JSON.stringify({
+//                 "customerId": "testCustomer",
+//                 "hotelName": "Hilton Waikiki Beach",
+//                 "roomType": "Mountain View Suite",
+//                 "checkInDate": "2021-4-23",
+//                 "checkOutDate": "2021-4-25",
+//                 "reserveCount": 1
+//             })
+// };
+
+// fetch('https://zmtiry43m6.execute-api.us-west-2.amazonaws.com/v1/reserve', requestOptions)
+//     .then(async response => {
+//         // check for error response
+//                 if (!response.ok) {
+//                         // get error message from body or default to response status
+//                         const error = (data && data.message) || response.status;
+//                         return Promise.reject(error);
+//                 }
+//                 // succeeded
+//                 const data = await response.json();
+//                 // display data in UI.
+//                 this.setState({ postId: data })
+//                 // ...
+
+//         })
+//         .catch(error => {
+//                 this.setState({ errorMessage: error.toString() });
+//                 console.error('There was an error!', error);
+//         });    
+
+
+// const requestOptions = {
+//     method: 'POST',
+//     headers: { 'Content-Type': 'application/json' },
+//     body: JSON.stringify({ title: 'React POST Request Example' })
+// };
+// fetch('https://reqres.in/api/posts', requestOptions)
+//     .then(async response => {
+//         const isJson = response.headers.get('content-type')?.includes('application/json');
+//         const data = isJson && await response.json();
+
+//         // check for error response
+//         if (!response.ok) {
+//             // get error message from body or default to response status
+//             const error = (data && data.message) || response.status;
+//             return Promise.reject(error);
+//         }
+
+//         this.setState({ postId: data.id })
+//     })
+//     .catch(error => {
+//         this.setState({ errorMessage: error.toString() });
+//         console.error('There was an error!', error);
+//     });
+
+
+
+
+
+
+// fetch('https://reqres.in/api/posts')
+// .then(response => response.json())
+// .then(data => this.setState({ postId: data }));
    
 }
+
 
 
 formatData(items){
@@ -61,9 +164,9 @@ formatData(items){
 }
 getRoom=(slug)=>{
     let tempRooms=[...this.state.rooms];
-    console.log("tempRooms are",tempRooms);
+ 
     const room=tempRooms.find((room)=>room.slug===slug)
-    console.log("Rooms are",tempRooms);
+    
     return room;
 }
 
@@ -76,7 +179,9 @@ handleChange=event=>{
       console.log("name is ",name);
     
     this.setState({[name]:value},this.filterRooms)
-
+}
+signOut=()=>{
+    this.setState({currentUser:null})
 }
 
 filterRooms=()=>{
@@ -126,8 +231,12 @@ filterRooms=()=>{
 
     render() {
         return (
-  <RoomContext.Provider value={{...this.state,getRoom:this.getRoom,handleChange:this.handleChange}}>
+            
+  <RoomContext.Provider value={{...this.state,getRoom:this.getRoom,handleChange:this.handleChange,signOut:this.signOut}}>
  {this.props.children}
+ {console.log("the data is ",this.state.postId)}
+ {console.log("error message is,",this.state.errorMessage)}
+
  </RoomContext.Provider>
         )
     }
