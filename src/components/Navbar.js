@@ -1,6 +1,5 @@
-import React, { Component } from 'react'
+import React from 'react'
 import logo from '../images/logo.svg'
-import {FaAlignRight} from 'react-icons/fa'
 import {Link} from 'react-router-dom'
 import {useContext} from 'react'
 import {RoomContext} from '../context'
