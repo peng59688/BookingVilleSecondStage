@@ -48,12 +48,12 @@ getData=async()=>{
 //get Currentuser
 getCurrentUser=()=>{
     const url=window.location.href;
-   
-    var index=url.indexOf("lo");
+     var index=url.indexOf("#id_token=");
+    // var index=url.indexOf("l");
    console.log("current index is ",index)
    console.log("current window.location.href is  ",window.location.href)
    if(index!==-1){
-       console.log("currentuser has been changed")
+    console.log(" if sentence activates, current user has been changed ")
  const currentToken=url.substring(index+10,url.length);
  this.setState({currentUser:currentToken});
  }
