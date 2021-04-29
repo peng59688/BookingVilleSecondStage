@@ -19,6 +19,7 @@ componentDidMount(){}
 
 
     render() {
+        console.log("this.state.slug is ",this.state.slug)
         const{getRoom}=this.context
         const room=getRoom(this.state.slug)
         if(!room){
@@ -29,7 +30,7 @@ componentDidMount(){}
             </Link>
             </div>)
         }
-        const {name,description,capacity,size,price,extras,breakfast,pets,images}=room
+        const {slug,name,description,capacity,size,price,extras,breakfast,pets,images}=room
      
         return (
             <>
@@ -76,7 +77,7 @@ componentDidMount(){}
             </ul>
             </section>
 <div className='reserve'>
-<Link to='/rooms' className='btn-primary reserve'>
+<Link to={`${slug}/reservation`} className='btn-primary reserve'>
                  I'll reserve
                  </Link>
 </div >

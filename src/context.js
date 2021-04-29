@@ -49,37 +49,24 @@ getData=async()=>{
 getCurrentUser=()=>{
     const url=window.location.href;
     //  var index=url.indexOf("#id_token=");
-    var index=url.indexOf("lo")
-   
+    var index=url.indexOf("lo");
+   console.log("current index is ",index)
    if(index!==-1){
- const currentToken=url.substring(index+10,url.length)
- this.setState({currentUser:currentToken})
- ;}
+ const currentToken=url.substring(index+10,url.length);
+ this.setState({currentUser:currentToken});
+ }
  
 }
+
+
+//reservation 
 
 
 componentDidMount(){
    this.getData();
    this.getCurrentUser();
-   const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ roomType: "Mountain View Suite",
-    hotelName: "Hilton Waikiki Beach", })
-};
-fetch('https://zmtiry43m6.execute-api.us-west-2.amazonaws.com/v1/query-reservation', requestOptions)
-    .then(async response => {
-        const data = await response.json();
-       
-        // display data in UI.
-        this.setState({ postId: data })
-
-    })
-    .catch(error => {
-                         this.setState({ errorMessage: error.toString() });
-                        console.error('There was an error!', error);
-                 });    
+//    this.sendData();
+  console.log("context component has been rendered")
  
 // 1.
 // const requestOptions = {
@@ -236,7 +223,8 @@ filterRooms=()=>{
  {this.props.children}
  {console.log("the data is ",this.state.postId)}
  {console.log("error message is,",this.state.errorMessage)}
-
+ {console.log("currentUser of context is",this.state.currentUser)}
+ {console.log("current window.location.href is",window.location.href)}
  </RoomContext.Provider>
         )
     }

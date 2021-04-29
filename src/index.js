@@ -4,6 +4,8 @@ import {BrowserRouter as Router} from 'react-router-dom'
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {RoomProvider} from './context'
+import 'react-calendar/dist/Calendar.css'
+import 'semantic-ui-css/semantic.min.css'
 ReactDOM.render(
   <RoomProvider>
   <Router>

@@ -612,5 +612,23 @@ li {
 }
 .reserve{
   display:flex;
-  margin: 50px auto 50px auto;
+  margin: 10px auto 50px auto;
+}
+.check-in-calendar{
+  margin: 0px 250px 5px 400px;
+}
+.check-out-calendar{
+  margin: 0px 400px 0px auto;
+}
+.calendar-header{
+  margin: auto auto 10px auto;
+}
+.people{
+  text-align: center;
+}
+.center{
+  margin: auto auto 10px auto;
+}
+.teal{
+  background-color:teal;
 }
