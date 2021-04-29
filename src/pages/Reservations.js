@@ -42,10 +42,11 @@ sendData=()=>{
         console.log("inside send data, state is ",this.state)
         console.log("inside send data, hotel is  ",hotel);
         console.log("inside send data, room is  ",name);
+        console.log("currentUser is ",currentUser)
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' ,
-        'Authorization': 'eyJraWQiOiJVQUtTcDlnWFNPSWZyODl1TDlzdjBaa3FLb2N1QVp2V00wUkVwek0xYjRBPSIsImFsZyI6IlJTMjU2In0.eyJhdF9oYXNoIjoiM2JxSjk5b1NMUm1Fel9xeWh3RjZXUSIsInN1YiI6ImZiN2Y0NDllLTdmZmUtNDdmNy05NTQ5LTgxNDliM2I5MDhiMSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtd2VzdC0yLmFtYXpvbmF3cy5jb21cL3VzLXdlc3QtMl85bHZTaUdyYzUiLCJjb2duaXRvOnVzZXJuYW1lIjoiZmI3ZjQ0OWUtN2ZmZS00N2Y3LTk1NDktODE0OWIzYjkwOGIxIiwiZ2l2ZW5fbmFtZSI6InRpYW4iLCJhdWQiOiIxZnFxYmgwaTdmb2Y4YjhsMzdsM3IzaWhjOSIsInRva2VuX3VzZSI6ImlkIiwiYXV0aF90aW1lIjoxNjE5Njc5MjA1LCJleHAiOjE2MTk2ODI4MDUsImlhdCI6MTYxOTY3OTIwNSwiZmFtaWx5X25hbWUiOiJ0YW4iLCJlbWFpbCI6Ino1MTMzMTYxQGdtYWlsLmNvbSJ9.yU9F1JjI36mheBD4Da0DSfGTVjWB1q8UonAwPvobA2ooyNAqI-TOWFs1Qdafn2wsNfiptmTkNo4seu1-V4-eKsljU-lEcXOT4cfm2EyzEq_JeqEtjh1QomhdsYAEpS9xCevHhXYhAxHQZovtlh3LYtUwHPSrAYr4CGmVx0gezcPuzOFT8WP9LXd0Y9v1SPBSMCUb-WnEzvXbJD_fwZ_AbI_0RDM1VcREAdPU5KTXVgqhAnsqH9MTdSZm0YpNkApKvgB9z2fPGzt2Ydg56OJPAlmC58aPObAKhqAOwLJcL6cw5qzVEZ3a3u7Wk9PGQoayOgNj0lQAiP90w96kAqqPYA'},
+        'Authorization': currentUser},
         body: JSON.stringify({      
             //   "customerId": currentUser,
                         "hotelName": hotel,
@@ -111,7 +112,7 @@ changePeople=(event)=>{
             
             <div className=' RoomContainer'>
             {console.log("currentUser inside reservation is   ",currentUser)}
-            
+            {console.log("returned data is ",this.state.postId)};
              <StyledHero img={images[0]}>
                  <Banner title={`${name}`}>
                  <Link to='/rooms' className='btn-primary'>
