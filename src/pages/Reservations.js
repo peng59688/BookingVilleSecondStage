@@ -8,6 +8,10 @@ import { Header } from "semantic-ui-react";
 import Calendar from "react-calendar";
 import * as moment from "moment";
 import Title from "../components/Title";
+
+const apiEndpoint =
+  "https://ak5v0aru07.execute-api.us-west-2.amazonaws.com/v1/";
+
 export default class SingleRoom extends Component {
   constructor(props) {
     super(props);
@@ -58,10 +62,7 @@ export default class SingleRoom extends Component {
         reserveCount: this.state.reserveCount,
       }),
     };
-    fetch(
-      "https://ak5v0aru07.execute-api.us-west-2.amazonaws.com/v1/query-reservation",
-      requestOptions
-    )
+    fetch(apiEndpoint + "reserve", requestOptions)
       .then(async (response) => {
         const data = await response.json();
 
@@ -200,4 +201,3 @@ export default class SingleRoom extends Component {
     );
   }
 }
-
